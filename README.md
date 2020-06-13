@@ -32,7 +32,9 @@ PyAutoGui "pip install pyautogui" (https://pypi.org/project/PyAutoGUI/)
 
 keyboard "pip install keyboard" (https://pypi.org/project/keyboard/)
 
-NOTE
-====
+NOTES
+=====
+
+Enchanted cobble is a nice one to trade, as it fluctuates a lot. To see what to buy, see https://skyblock-tool.xyz/index.php
 
 This may be bannable on hypixel, I think. Also, this really won't do much, the price fluctuations are to trivial to notice. It has many bugs, especially for a script written by a bored 11 year old in quarintine.
