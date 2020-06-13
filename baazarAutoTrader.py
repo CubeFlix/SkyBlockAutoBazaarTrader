@@ -53,6 +53,8 @@ def sell(amount):
     for i in range(0, amount):
         time.sleep(0.1)
         sellbuttonpos = p.locateOnScreen('images/'+itemTrading+'.png')
+        if sellbuttonpos == None:
+            enterBazaar()
         p.moveTo(sellbuttonpos)
         time.sleep(0.1)
         p.click()
@@ -68,6 +70,8 @@ def buy(amount):
     for i in range(0, amount):
         time.sleep(0.1)
         buybuttonpos = p.locateOnScreen('images/'+itemTrading+'.png')
+        if buybuttonpos == None:
+            enterBazaar()
         p.moveTo(buybuttonpos)
         time.sleep(0.1)
         p.click()
@@ -75,6 +79,8 @@ def buy(amount):
         p.move(100, 100)
 
     backbuttonpos = p.locateOnScreen('images/back.png')
+    if backbuttonpos == None:
+        enterBazaar()
     p.moveTo(backbuttonpos)
     p.click()
     global heldItems
@@ -89,14 +95,13 @@ def calculateTranscation():
         return Transaction('sell', heldItems)
 
 def trade():
-    while currentTransactions < maxTransactions:
-        trans = calculateTranscation()
-        if trans.ttype == 'buy':
-            buy(trans.amount)
-        elif trans.ttype == 'sell':
-            sell(trans.amount)
-        elif trans.ttype == 'none':
-            continue
+    trans = calculateTranscation()
+    if trans.ttype == 'buy':
+        buy(trans.amount)
+    elif trans.ttype == 'sell':
+        sell(trans.amount)
+    elif trans.ttype == 'none':
+        continue
 
 if __name__ == '__main__':
     time.sleep(10)
