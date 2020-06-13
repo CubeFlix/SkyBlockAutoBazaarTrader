@@ -1,6 +1,7 @@
 # SkyBlockAutoBazaarTrader
 
-![The Bazaar](docimages/bazaar.PNG)
+![The Bazaar](docimages/bazaar.png)
+(dont make fun of my stats)
 
  A auto-trader for Hypixel Skyblock's bazaar.
 
@@ -13,7 +14,7 @@ Instructions:
 
 Download the script.
 
-Install pyautogui (pip install pyautogui) and python (https://www.python.org/). 
+Install pyautogui (pip install pyautogui), keyboard (pip install keyboard), and python (https://www.python.org/). 
 
 Enter the GUI for the bazaar, and open up the item you want to buy, and it's trading options.
 
@@ -29,7 +30,11 @@ Python 2-3 (https://www.python.org/)
 
 PyAutoGui "pip install pyautogui" (https://pypi.org/project/PyAutoGUI/)
 
-NOTE
-====
+keyboard "pip install keyboard" (https://pypi.org/project/keyboard/)
+
+NOTES
+=====
+
+Enchanted cobble is a nice one to trade, as it fluctuates a lot. To see what to buy, see https://skyblock-tool.xyz/index.php
 
 This may be bannable on hypixel, I think. Also, this really won't do much, the price fluctuations are to trivial to notice. It has many bugs, especially for a script written by a bored 11 year old in quarintine.
