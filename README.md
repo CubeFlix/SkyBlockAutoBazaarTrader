@@ -13,7 +13,7 @@ Instructions:
 
 Download the script.
 
-Install pyautogui (pip install pyautogui) and python (https://www.python.org/). 
+Install pyautogui (pip install pyautogui), keyboard (pip install keyboard), and python (https://www.python.org/). 
 
 Enter the GUI for the bazaar, and open up the item you want to buy, and it's trading options.
 
@@ -28,6 +28,8 @@ Dependencies
 Python 2-3 (https://www.python.org/)
 
 PyAutoGui "pip install pyautogui" (https://pypi.org/project/PyAutoGUI/)
+
+keyboard "pip install keyboard" (https://pypi.org/project/keyboard/)
 
 NOTE
 ====
