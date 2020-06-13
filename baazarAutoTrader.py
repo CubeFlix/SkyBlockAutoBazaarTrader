@@ -10,8 +10,6 @@ import pyautogui as p
 itemTrading = "WHEAT" # The item to trade
 apiKey = 'b8ec178c-b211-48ea-be2f-7191e988efb7' # Your api key. Enter /api new on mc.hypixel.net.
 maxTransactions = 10
-currentTransactions = 0
-maxTransactionAmount = 10
 priceHistory = []
 heldItems = 0
 lastPurchase = None
@@ -88,20 +86,25 @@ def buy(amount):
 
 def calculateTranscation():
     priceHistory.append(fetchPriceData())
+    global heldItems
+    global lastPurchase
     if heldItems == 0:
         lastPurchase = priceHistory[-1]
         return Transaction('buy', maxTransactionAmount)
     elif heldItems > 0 and lastPurchase.get('buyPrice') < priceHistory[-1].get('sellPrice'):
         return Transaction('sell', heldItems)
+    else:
+        return Transaction('none', 0)
 
 def trade():
     trans = calculateTranscation()
-    if trans.ttype == 'buy':
-        buy(trans.amount)
-    elif trans.ttype == 'sell':
-        sell(trans.amount)
-    elif trans.ttype == 'none':
-        continue
+    while True:
+        if trans.ttype == 'buy':
+            buy(trans.amount)
+        elif trans.ttype == 'sell':
+            sell(trans.amount)
+        elif trans.ttype == 'none':
+            continue
 
 if __name__ == '__main__':
     time.sleep(10)
