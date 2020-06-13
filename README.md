@@ -1,6 +1,7 @@
 # SkyBlockAutoBazaarTrader
 
 ![The Bazaar](docimages/bazaar.png)
+(dont make fun of my stats)
 
  A auto-trader for Hypixel Skyblock's bazaar.
 
