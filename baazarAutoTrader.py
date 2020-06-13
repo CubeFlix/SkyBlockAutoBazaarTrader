@@ -4,14 +4,25 @@
 # This is bannable (i think), so please don't do this on the server. This was just for a programming challange.
 # By Kevin Chen
 
-import requests, time
+import requests, time, keyboard, os, threading
 import pyautogui as p
 
 itemTrading = "WHEAT" # The item to trade
-apiKey = '9be4bedf-a55a-4fcb-9155-969b9a1d47c2' # Your api key. Enter /api new on mc.hypixel.net.
+apiKey = 'b8ec178c-b211-48ea-be2f-7191e988efb7' # Your api key. Enter /api new on mc.hypixel.net.
 maxTransactions = 10
 currentTransactions = 0
+maxTransactionAmount = 10
 priceHistory = []
+heldItems = 0
+lastPurchase = None
+
+def checkKeyPress():
+    while True:
+        if keyboard.read_key() == "x":
+            os._exit(1)
+
+keypressthread = threading.Thread(target=checkKeyPress)
+keypressthread.start()
 
 class Transaction():
     def __init__(self, ttype, amount):
@@ -25,26 +36,57 @@ def fetchPriceData():
     statdata = _fetch("https://api.hypixel.net/skyblock/bazaar?key=" + apiKey)
     return {'sellPrice' : statdata['products'][itemTrading]['quick_status']['sellPrice'], 'buyPrice' : statdata['products'][itemTrading]['quick_status']['buyPrice']}
 
+def enterBazaar():
+    p.click(button='right')
+    buttonpos = p.locateOnScreen('images/'+itemTrading+'.png')
+    p.moveTo(buttonPos)
+    p.click()
+    buttonpos = p.locateOnScreen('images/'+itemTrading+'.png')
+    p.moveTo(buttonPos)
+    p.click()
+    p.move(100, 100)
+
 def sell(amount):
-    p.click('sell.png', button='right')
+    p.click('images/sell.png', button='right')
     time.sleep(1)
+    p.move(100, 100)
     for i in range(0, amount):
-        p.click(itemTrading+'.png')
+        time.sleep(0.1)
+        sellbuttonpos = p.locateOnScreen('images/'+itemTrading+'.png')
+        p.moveTo(sellbuttonpos)
+        time.sleep(0.1)
+        p.click()
         time.sleep(1)
-    currentTransactions += 1
+        p.move(100, 100)
+    global heldItems
+    heldItems -= amount
         
 def buy(amount):
-    p.click('buy.png')
+    p.click('images/buy.png')
     time.sleep(1)
+    p.move(100, 100)
     for i in range(0, amount):
-        p.click(itemTrading+'.png')
+        time.sleep(0.1)
+        buybuttonpos = p.locateOnScreen('images/'+itemTrading+'.png')
+        p.moveTo(buybuttonpos)
+        time.sleep(0.1)
+        p.click()
         time.sleep(1)
-    currentTransactions += 1
-    p.click('back.png')
+        p.move(100, 100)
+
+    backbuttonpos = p.locateOnScreen('images/back.png')
+    p.moveTo(backbuttonpos)
+    p.click()
+    global heldItems
+    heldItems += amount
 
 def calculateTranscation():
     priceHistory.append(fetchPriceData())
-    return Transaction('none', 0)
+    if heldItems == 0:
+        lastPurchase = priceHistory[-1]
+        return Transaction('buy', maxTransactionAmount)
+    elif heldItems > 0 and lastPurchase.get('buyPrice') < priceHistory[-1].get('sellPrice'):
+        return Transaction('sell', heldItems)
 
 def trade():
     while currentTransactions < maxTransactions:
@@ -57,6 +99,7 @@ def trade():
             continue
 
 if __name__ == '__main__':
+    time.sleep(10)
     trade()
 
 

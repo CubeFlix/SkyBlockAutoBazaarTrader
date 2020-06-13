@@ -17,7 +17,7 @@ Install pyautogui (pip install pyautogui) and python (https://www.python.org/).
 
 Enter the GUI for the bazaar, and open up the item you want to buy, and it's trading options.
 
-Set script variable itemTrading to be the ID of the item to sell. 
+Set script variable itemTrading to be the ID of the item to sell. Create an image /images/ITEM_ID_NAME.png to be the icon of the item you want to trade.
 
 Begin the script.
 
@@ -28,3 +28,8 @@ Dependencies
 Python 2-3 (https://www.python.org/)
 
 PyAutoGui "pip install pyautogui" (https://pypi.org/project/PyAutoGUI/)
+
+NOTE
+====
+
+This may be bannable on hypixel, I think. Also, this really won't do much, the price fluctuations are to trivial to notice. It has many bugs, especially for a script written by a bored 11 year old in quarintine.
